@@ -1,7 +1,19 @@
+import { Navigate, Routes } from "react-router";
+import FeedLayout from "./layouts/Feed/FeedLayout";
+import { Route } from "react-router";
+import FeedPage from "./pages/Feed/FeedPage";
+
 function App() {
   return (
     <>
-      <section className="bg-red-500">HELLLLLLOs sdfa</section>
+      <Routes>
+        <Route path="" element={<FeedLayout />}>
+          <Route path="" element={<FeedPage />} />
+        </Route>
+
+        {/* deal with the rest */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </>
   );
 }
