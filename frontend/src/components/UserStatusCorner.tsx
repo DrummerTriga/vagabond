@@ -6,7 +6,7 @@ const UserStatusCorner = () => {
   return (
     <>
       <div className="flex justify-around items-center w-1/4 ">
-        <Button icon={<Plus />} children="Create new Trip" />
+        <Button icon={<Plus />} children="Post new Trip" className="py-3" />
         <button className="p-2.5 rounded-full text-stone-500 hover:bg-stone-200 hover:text-[#F05A42] cursor-pointer transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#F05A42]/40">
           <Bell size={22} />
         </button>
