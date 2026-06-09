@@ -13,8 +13,8 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center w-[15%] border border-red-600">
-        <div>
+      <div className="flex flex-col items-center w-[15%] border-r border-stone-400/30">
+        <div className="flex flex-col gap-4 mt-5">
           {sidebarContent.map((tab) => (
             <SidebarTab tabName={tab} />
           ))}{" "}

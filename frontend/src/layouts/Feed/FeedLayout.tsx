@@ -5,9 +5,9 @@ import Header from "../../components/Header";
 const FeedLayout = () => {
   return (
     <>
-      <div className="flex flex-col min-h-dvh min-w-dvw bg-slate-50">
+      <div className="flex flex-col min-h-dvh min-w-dvw bg-stone-50">
         <Header />
-        <div className="flex justify-around w-full h-full bg-slate-50">
+        <div className="flex flex-1 justify-around w-full">
           <Sidebar />
           <Outlet />
         </div>
