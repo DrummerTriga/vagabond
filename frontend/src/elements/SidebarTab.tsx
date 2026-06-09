@@ -1,8 +1,23 @@
-const SidebarTab = ({ tabName }) => {
+const SidebarTab = ({ tabName, icon, isActive = false }) => {
   return (
     <>
-      <div className="flex justify-center items-center p-2.5 px-8 rounded-2xl bg-white border border-stone-200 shadow-sm text-stone-600 font-medium hover:text-[#F05A42] hover:border-[#F05A42]/50 hover:shadow-md hover:bg-stone-50 cursor-pointer active:scale-95 transition-all duration-300">
-        {tabName}
+      <div
+        className={`group flex items-center gap-4 w-full p-3 pl-6 rounded-2xl font-medium cursor-pointer transition-all duration-300 active:scale-95 ${
+          isActive
+            ? "bg-[#FEF1EE] text-[#F05A42]"
+            : "text-stone-700 bg-transparent hover:bg-stone-100"
+        }`}
+      >
+        <div
+          className={`transition-colors duration-300 ${
+            isActive
+              ? "text-[#F05A42]"
+              : "text-stone-600 group-hover:text-stone-800"
+          }`}
+        >
+          {icon}
+        </div>
+        <span className="text-md tracking-wide">{tabName}</span>
       </div>
     </>
   );
