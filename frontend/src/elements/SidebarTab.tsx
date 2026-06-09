@@ -1,7 +1,7 @@
 const SidebarTab = ({ tabName }) => {
   return (
     <>
-      <div className="flex justify-center items-center p-2 px-8 rounded-xl bg-stone-200 border border-stone-300 text-stone-700 font-medium hover:bg-stone-300 cursor-pointer transition-colors">
+      <div className="flex justify-center items-center p-2.5 px-8 rounded-2xl bg-white border border-stone-200 shadow-sm text-stone-600 font-medium hover:text-[#F05A42] hover:border-[#F05A42]/50 hover:shadow-md hover:bg-stone-50 cursor-pointer active:scale-95 transition-all duration-300">
         {tabName}
       </div>
     </>
