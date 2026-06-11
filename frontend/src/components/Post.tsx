@@ -1,10 +1,138 @@
-const Post = () => {
+import {
+  Heart,
+  MessageCircle,
+  Share2,
+  MoreHorizontal,
+  MapPin,
+} from "lucide-react";
+import userIcon from "../assets/userIcon.png";
+
+export interface PostProps {
+  user: {
+    name: string;
+    avatar?: string;
+  };
+  location: string;
+  timeAgo: string;
+  content: string;
+  images?: string[];
+  guide?: {
+    title: string;
+    description: string;
+    rating: number;
+    price?: string;
+  };
+  likes: number;
+  comments: number;
+}
+
+const Post = ({ post }: { post?: PostProps }) => {
+  // Use post prop if available, otherwise default to mock
+  const data = post || {
+    user: { name: "John Doe", avatar: userIcon },
+    location: "Paris, France",
+    timeAgo: "2 hours ago",
+    content:
+      "Just arrived in Paris! The Eiffel Tower looks amazing at night. Can't wait to explore the city tomorrow. Let me know your recommendations! 🥐🍷",
+    likes: 124,
+    comments: 24,
+  };
+
+  const avatarSrc = data.user.avatar || userIcon;
+
   return (
-    <>
-      <div className="flex flex-col justify-center items-center w-[80%] bg-white border border-stone-200 rounded-2xl shadow-sm p-6 text-stone-800">
-        Post
+    <div className="flex flex-col w-[80%] bg-white border border-stone-200 rounded-2xl shadow-sm p-5 text-stone-800 hover:shadow-md transition-all duration-300">
+      {/* Header */}
+      <div className="flex justify-between items-center mb-4">
+        <div className="flex items-center gap-3">
+          <img
+            src={avatarSrc}
+            alt="User Avatar"
+            className="w-11 h-11 p-0.5 rounded-full object-cover border-2 border-stone-200"
+          />
+          <div className="flex flex-col">
+            <span className="font-bold text-stone-800 tracking-wide">
+              {data.user.name}
+            </span>
+            <span className="text-xs text-stone-500 font-medium">
+              {data.timeAgo} in {data.location}
+            </span>
+          </div>
+        </div>
+        <button className="text-stone-400 hover:text-stone-700 transition-colors p-2 rounded-full hover:bg-stone-100">
+          <MoreHorizontal size={20} />
+        </button>
       </div>
-    </>
+
+      {/* Content */}
+      <div className="mb-4">
+        <p className="text-stone-700 leading-relaxed mb-4">{data.content}</p>
+
+        {/* Images Grid */}
+        {data.images && data.images.length > 0 && (
+          <div
+            className={`grid gap-2 mb-3 ${data.images.length === 1 ? "grid-cols-1" : "grid-cols-2"}`}
+          >
+            {data.images.map((img, idx) => (
+              <img
+                key={idx}
+                src={img}
+                alt="Post content"
+                className="rounded-xl w-full h-72 object-cover border border-stone-200"
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Guide / Tour Widget */}
+        {data.guide && (
+          <div className="flex items-center gap-4 bg-stone-50 border border-stone-200 rounded-xl p-4 mt-2 cursor-pointer hover:border-[#F05A42]/50 hover:bg-[#FEF1EE] transition-all duration-300 group">
+            <div className="p-3 bg-white rounded-lg shadow-sm border border-stone-100 text-stone-400 group-hover:text-[#F05A42] transition-colors">
+              <MapPin size={26} />
+            </div>
+            <div className="flex flex-col flex-1">
+              <span className="font-bold text-stone-800 group-hover:text-[#F05A42] transition-colors">
+                {data.guide.title}
+              </span>
+              <span className="text-sm text-stone-500">
+                {data.guide.description}
+              </span>
+            </div>
+            {data.guide.price && (
+              <div className="font-bold text-stone-700 bg-white px-3 py-1 rounded-full border border-stone-200 shadow-sm">
+                {data.guide.price}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* Divider */}
+      <div className="h-px bg-stone-100 w-full mb-2"></div>
+
+      {/* Actions */}
+      <div className="flex items-center gap-6">
+        <button className="group flex items-center gap-2 text-stone-500 hover:text-[#F05A42] transition-colors focus:outline-none">
+          <div className="p-2 rounded-full group-hover:bg-[#FEF1EE] transition-colors">
+            <Heart size={22} />
+          </div>
+          <span className="text-sm font-semibold">{data.likes}</span>
+        </button>
+
+        <button className="group flex items-center gap-2 text-stone-500 hover:text-stone-800 transition-colors focus:outline-none">
+          <div className="p-2 rounded-full group-hover:bg-stone-100 transition-colors">
+            <MessageCircle size={22} />
+          </div>
+          <span className="text-sm font-semibold">{data.comments}</span>
+        </button>
+
+        <button className="group flex items-center gap-2 text-stone-500 hover:text-stone-800 transition-colors focus:outline-none ml-auto">
+          <div className="p-2 rounded-full group-hover:bg-stone-100 transition-colors">
+            <Share2 size={22} />
+          </div>
+        </button>
+      </div>
+    </div>
   );
 };
 
