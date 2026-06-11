@@ -1,9 +1,12 @@
+import { useState } from "react";
 import {
   Heart,
   MessageCircle,
   Share2,
   MoreHorizontal,
   MapPin,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import userIcon from "../assets/userIcon.png";
 
@@ -27,6 +30,8 @@ export interface PostProps {
 }
 
 const Post = ({ post }: { post?: PostProps }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
   // Use post prop if available, otherwise default to mock
   const data = post || {
     user: { name: "John Doe", avatar: userIcon },
@@ -39,6 +44,18 @@ const Post = ({ post }: { post?: PostProps }) => {
   };
 
   const avatarSrc = data.user.avatar || userIcon;
+
+  const nextImage = () => {
+    if (data.images && currentImageIndex < data.images.length - 1) {
+      setCurrentImageIndex((prev) => prev + 1);
+    }
+  };
+
+  const prevImage = () => {
+    if (currentImageIndex > 0) {
+      setCurrentImageIndex((prev) => prev - 1);
+    }
+  };
 
   return (
     <div className="flex flex-col w-[80%] bg-white border border-stone-200 rounded-2xl shadow-sm p-5 text-stone-800 hover:shadow-md transition-all duration-300">
@@ -68,19 +85,51 @@ const Post = ({ post }: { post?: PostProps }) => {
       <div className="mb-4">
         <p className="text-stone-700 leading-relaxed mb-4">{data.content}</p>
 
-        {/* Images Grid */}
+        {/* Images Carousel */}
         {data.images && data.images.length > 0 && (
-          <div
-            className={`grid gap-2 mb-3 ${data.images.length === 1 ? "grid-cols-1" : "grid-cols-2"}`}
-          >
-            {data.images.map((img, idx) => (
-              <img
-                key={idx}
-                src={img}
-                alt="Post content"
-                className="rounded-xl w-full h-72 object-cover border border-stone-200"
-              />
-            ))}
+          <div className="relative mb-3 rounded-xl overflow-hidden group border border-stone-200 bg-stone-100">
+            <img
+              src={data.images[currentImageIndex]}
+              alt="Post content"
+              className="w-full h-96 sm:h-[450px] object-cover transition-opacity duration-300"
+            />
+            
+            {/* Arrows */}
+            {data.images.length > 1 && (
+              <>
+                {currentImageIndex > 0 && (
+                  <button
+                    onClick={prevImage}
+                    className="absolute left-2 top-1/2 -translate-y-1/2 p-1.5 bg-white/70 hover:bg-white backdrop-blur-md rounded-full text-stone-700 shadow-md transition-all opacity-0 group-hover:opacity-100 focus:outline-none hover:scale-105 active:scale-95"
+                  >
+                    <ChevronLeft size={24} />
+                  </button>
+                )}
+                
+                {currentImageIndex < data.images.length - 1 && (
+                  <button
+                    onClick={nextImage}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-white/70 hover:bg-white backdrop-blur-md rounded-full text-stone-700 shadow-md transition-all opacity-0 group-hover:opacity-100 focus:outline-none hover:scale-105 active:scale-95"
+                  >
+                    <ChevronRight size={24} />
+                  </button>
+                )}
+                
+                {/* Dots indicator */}
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 bg-black/20 px-2 py-1.5 rounded-full backdrop-blur-sm">
+                  {data.images.map((_, idx) => (
+                    <div
+                      key={idx}
+                      className={`h-1.5 rounded-full transition-all duration-300 shadow-sm ${
+                        currentImageIndex === idx
+                          ? "w-4 bg-white"
+                          : "w-1.5 bg-white/60"
+                      }`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         )}
 

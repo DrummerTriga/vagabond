@@ -1,21 +1,11 @@
-import { PersonStanding, Plane } from "lucide-react";
 import Post from "../../components/Post";
-import Sidebar from "../../components/Sidebar";
 import Button from "../../elements/Button";
+import RightSidebar from "../../components/RightSidebar";
 
 const FeedPage = () => {
-  // This should be reformuled. We will have a next trip Widget, recommendations of guides, guias mais destacados, trending travelers, find a travel-buddy etc"
-  const rightSidebarContent = [
-    { name: "Your next trip", icon: <Plane size={22} strokeWidth={2.5} /> },
-    {
-      name: "Find your guide",
-      icon: <PersonStanding size={22} strokeWidth={2} />,
-    },
-  ];
-
   return (
-    <div className="w-full flex">
-      <div className="feed-wrapper flex flex-col items-center justify-start w-[85%]">
+    <div className="w-full flex justify-between">
+      <div className="feed-wrapper flex flex-col items-center justify-start flex-1 max-w-3xl mx-auto">
         <div className="flex justify-center mt-6 gap-8">
           <Button children="Friends" className="h-15 w-60 rounded-xl" />
           <Button children="Following" className="h-15 w-60 rounded-xl" />
@@ -47,15 +37,41 @@ const FeedPage = () => {
                 "Just arrived in Paris! The Eiffel Tower looks amazing at night. Can't wait to explore the city tomorrow. Let me know your recommendations! 🥐🍷",
               images: [
                 "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=80",
+                "https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?auto=format&fit=crop&w=800&q=80",
+                "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80",
               ],
               likes: 124,
               comments: 24,
             }}
           />
+          <Post
+            post={{
+              user: { name: "Sofia Martins" },
+              location: "Lisbon, Portugal",
+              timeAgo: "5 hours ago",
+              content:
+                "Does anyone know a good hidden specialty coffee shop in Alfama? ☕️ Trying to find a quiet place to read this afternoon and escape the tourist crowds!",
+              likes: 89,
+              comments: 12,
+            }}
+          />
+          <Post
+            post={{
+              user: { name: "David Chen" },
+              location: "Swiss Alps, Switzerland",
+              timeAgo: "1 day ago",
+              content:
+                "Hiking the Alps today was absolutely breathtaking. The air is so fresh and the views are unreal. Definitely adding this to my top 10 trails of all time! 🏔️🌲",
+              images: [
+                "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80",
+              ],
+              likes: 512,
+              comments: 48,
+            }}
+          />
         </div>
       </div>
-      {/* under work, regarding comments up */}
-      <Sidebar sidebarContent={rightSidebarContent} className="" />
+      <RightSidebar />
     </div>
   );
 };

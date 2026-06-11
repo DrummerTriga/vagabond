@@ -1,7 +1,7 @@
 import { Settings } from "lucide-react";
 import SidebarTab from "../elements/SidebarTab";
 
-const Sidebar = ({ sidebarContent, className = "", ...props }) => {
+const LeftSidebar = ({ sidebarContent, className = "", ...props }) => {
   return (
     <>
       <div
@@ -32,4 +32,4 @@ const Sidebar = ({ sidebarContent, className = "", ...props }) => {
   );
 };
 
-export default Sidebar;
+export default LeftSidebar;

@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import Sidebar from "../../components/Sidebar";
+import LeftSidebar from "../../components/LeftSidebar";
 import Header from "../../components/Header";
 import {
   Home,
@@ -31,7 +31,7 @@ const FeedLayout = () => {
       <div className="flex flex-col min-h-dvh min-w-dvw bg-stone-50">
         <Header />
         <div className="flex flex-1 justify-around w-full">
-          <Sidebar sidebarContent={sidebarContent} />
+          <LeftSidebar sidebarContent={sidebarContent} />
           <Outlet />
         </div>
       </div>
