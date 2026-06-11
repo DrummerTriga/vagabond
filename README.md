@@ -7,9 +7,7 @@ I'm building a vibrant, modern social platform dedicated entirely to travelers, 
 ### 📖 Why "Vagabond"?
 The name *Vagabond* is born from two distinct passions. First, an endless love for traveling, discovering new cultures, and exploring the unknown. Second, it is deeply inspired by the acclaimed manga series *"Vagabond"*. Just as Miyamoto Musashi's journey in the story is about profound inner growth, confronting fears, and finding one's path, I believe that true travel is not just about the physical places we visit, but the personal transformation we undergo along the way. 🗡️🏔️
 
-<div align="center">
-  <img src="https://media.tenor.com/c6P3wFvOibEAAAAd/vagabond-musashi.gif" alt="Vagabond Musashi peaceful breeze" width="500" style="border-radius: 12px; margin-top: 10px;" />
-</div>
+<img width="640" height="360" alt="musashi-musashi-miyamoto" src="https://github.com/user-attachments/assets/8edc7faa-3775-4a66-a47d-facd74781ea9" />
 
 ### 🚧 Work in Progress
 *Good things take time!* 
