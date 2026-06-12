@@ -9,6 +9,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import userIcon from "../assets/userIcon.png";
+import ImageModal from "./ImageModal";
 
 export interface PostProps {
   user: {
@@ -31,6 +32,7 @@ export interface PostProps {
 
 const Post = ({ post }: { post?: PostProps }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Use post prop if available, otherwise default to mock
   const data = post || {
@@ -87,13 +89,14 @@ const Post = ({ post }: { post?: PostProps }) => {
 
         {/* Images Carousel */}
         {data.images && data.images.length > 0 && (
-          <div className="relative mb-3 rounded-xl overflow-hidden group border border-stone-200 bg-stone-100">
+          <div className="relative mb-3 rounded-xl overflow-hidden group border border-stone-200 bg-stone-100 cursor-pointer">
             <img
               src={data.images[currentImageIndex]}
               alt="Post content"
+              onClick={() => setIsModalOpen(true)}
               className="w-full h-96 sm:h-[450px] object-cover transition-opacity duration-300"
             />
-            
+
             {/* Arrows */}
             {data.images.length > 1 && (
               <>
@@ -105,7 +108,7 @@ const Post = ({ post }: { post?: PostProps }) => {
                     <ChevronLeft size={24} />
                   </button>
                 )}
-                
+
                 {currentImageIndex < data.images.length - 1 && (
                   <button
                     onClick={nextImage}
@@ -114,7 +117,7 @@ const Post = ({ post }: { post?: PostProps }) => {
                     <ChevronRight size={24} />
                   </button>
                 )}
-                
+
                 {/* Dots indicator */}
                 <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 bg-black/20 px-2 py-1.5 rounded-full backdrop-blur-sm">
                   {data.images.map((_, idx) => (
@@ -181,6 +184,17 @@ const Post = ({ post }: { post?: PostProps }) => {
           </div>
         </button>
       </div>
+
+      {/* Fullscreen Image Modal */}
+      {data.images && data.images.length > 0 && isModalOpen && (
+        <ImageModal
+          onClose={() => setIsModalOpen(false)}
+          images={data.images}
+          initialIndex={currentImageIndex}
+          user={data.user}
+          timeAgo={data.timeAgo}
+        />
+      )}
     </div>
   );
 };
