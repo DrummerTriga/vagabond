@@ -1,14 +1,28 @@
+import { useState } from "react";
 import Post from "../../components/Post";
-import Button from "../../elements/Button";
 import RightSidebar from "../../components/RightSidebar";
 
 const FeedPage = () => {
+  const [activeTab, setActiveTab] = useState("All");
+  const tabs = ["All", "Friends", "Following"];
+
   return (
     <div className="w-full flex justify-between">
       <div className="feed-wrapper flex flex-col items-center justify-start flex-1 max-w-3xl mx-auto">
-        <div className="flex justify-center mt-6 gap-8">
-          <Button children="Friends" className="h-15 w-60 rounded-xl" />
-          <Button children="Following" className="h-15 w-60 rounded-xl" />
+        <div className="flex justify-center mt-6 gap-4">
+          {tabs.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`px-8 py-2.5 rounded-full font-bold text-sm transition-all duration-300 ${
+                activeTab === tab
+                  ? "bg-[#F05A42] text-white shadow-md scale-105"
+                  : "bg-white text-stone-500 border border-stone-200 hover:bg-stone-50 hover:text-stone-700 hover:border-stone-300 shadow-sm"
+              }`}
+            >
+              {tab}
+            </button>
+          ))}
         </div>
         <div className="posts-wrapper flex flex-col justify-center items-center w-full gap-6 mt-6 pb-10">
           <Post
