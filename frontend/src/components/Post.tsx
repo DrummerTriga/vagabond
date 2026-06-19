@@ -60,7 +60,7 @@ const Post = ({ post }: { post?: PostProps }) => {
   };
 
   return (
-    <div className="flex flex-col w-[80%] bg-white border border-stone-200 rounded-2xl shadow-sm p-5 text-stone-800 hover:shadow-md transition-all duration-300">
+    <div className="flex flex-col w-full bg-white border border-stone-200 rounded-2xl shadow-sm p-5 text-stone-800 hover:shadow-md transition-all duration-300">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center gap-3">

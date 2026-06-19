@@ -1,8 +1,11 @@
 import { Bell, MessageCircleIcon, Plus } from "lucide-react";
 import userIcon from "../assets/userIcon.png";
 import Button from "../elements/Button";
+import { useNavigate } from "react-router";
 
 const UserStatusCorner = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="flex justify-around items-center w-1/4 ">
@@ -17,6 +20,7 @@ const UserStatusCorner = () => {
           src={userIcon}
           className="w-12 h-12 p-0.5 rounded-full bg-white border-2 border-stone-300 hover:border-[#F05A42] hover:shadow-md cursor-pointer transition-all duration-300 shadow-sm object-cover"
           alt="User Avatar"
+          onClick={() => navigate("profile/me/")}
         />
       </div>
     </>
