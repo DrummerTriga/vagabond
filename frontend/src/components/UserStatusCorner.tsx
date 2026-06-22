@@ -1,4 +1,4 @@
-import { Bell, MessageCircleIcon, Plus } from "lucide-react";
+import { Bell, MessageCircleIcon, Plus, Globe } from "lucide-react";
 import userIcon from "../assets/userIcon.png";
 import Button from "../elements/Button";
 import { useNavigate } from "react-router";
@@ -9,10 +9,10 @@ const UserStatusCorner = () => {
   return (
     <>
       <div className="flex justify-around items-center w-1/4 ">
-        <Button 
-          icon={<Plus />} 
-          children="Post new Trip" 
-          className="py-3" 
+        <Button
+          icon={<Plus />}
+          children="Post new Trip"
+          className="py-3"
           onClick={() => navigate("/create")}
         />
         <button className="p-2.5 rounded-full text-stone-500 hover:bg-stone-200 hover:text-[#F05A42] cursor-pointer transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#F05A42]/40">
@@ -20,7 +20,13 @@ const UserStatusCorner = () => {
         </button>
         <button
           className="p-2.5 rounded-full text-stone-500 hover:bg-stone-200 hover:text-[#F05A42] cursor-pointer transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#F05A42]/40"
-          onClick={() => navigate("messages/")}
+          onClick={() => navigate("/map")}
+        >
+          <Globe size={22} />
+        </button>
+        <button
+          className="p-2.5 rounded-full text-stone-500 hover:bg-stone-200 hover:text-[#F05A42] cursor-pointer transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#F05A42]/40"
+          onClick={() => navigate("/messages")}
         >
           <MessageCircleIcon size={22} />
         </button>
