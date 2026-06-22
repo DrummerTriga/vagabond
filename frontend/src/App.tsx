@@ -1,10 +1,14 @@
-import { Navigate, Routes } from "react-router";
+import { Navigate, Routes, Route } from "react-router";
 import FeedLayout from "./layouts/Feed/FeedLayout";
-import { Route } from "react-router";
 import FeedPage from "./pages/Feed/FeedPage";
 
 import UserProfileLayout from "./layouts/Profile/UserProfileLayout";
 import MePage from "./pages/Profile/MePage";
+
+import CreateNewPage from "./pages/Create/CreateNewPage";
+
+import MessagesLayout from "./layouts/Messages/MessagesLayout";
+import MessagesPage from "./pages/Messages/MessagesPage";
 
 function App() {
   return (
@@ -15,6 +19,12 @@ function App() {
         </Route>
         <Route path="profile" element={<UserProfileLayout />}>
           <Route path="me" element={<MePage />} />
+        </Route>
+        <Route path="create" element={<UserProfileLayout />}>
+          <Route path="" element={<CreateNewPage />} />
+        </Route>
+        <Route path="messages" element={<MessagesLayout />}>
+          <Route path="" element={<MessagesPage />} />
         </Route>
 
         {/* deal with the rest */}
