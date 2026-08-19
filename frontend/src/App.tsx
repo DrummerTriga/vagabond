@@ -9,6 +9,8 @@ import CreateNewPage from "./pages/Create/CreateNewPage";
 
 import MessagesLayout from "./layouts/Messages/MessagesLayout";
 import MessagesPage from "./pages/Messages/MessagesPage";
+import MapLayout from "./layouts/Map/MapLayout";
+import WorldMapPage from "./pages/Map/WorldMapPage";
 
 function App() {
   return (
@@ -22,6 +24,9 @@ function App() {
         </Route>
         <Route path="create" element={<UserProfileLayout />}>
           <Route path="" element={<CreateNewPage />} />
+        </Route>
+        <Route path="map" element={<MapLayout />}>
+          <Route path="" element={<WorldMapPage />} />
         </Route>
         <Route path="messages" element={<MessagesLayout />}>
           <Route path="" element={<MessagesPage />} />

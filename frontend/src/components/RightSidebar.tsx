@@ -3,7 +3,7 @@ import userIcon from "../assets/userIcon.png";
 
 const RightSidebar = () => {
   return (
-    <div className="flex flex-col w-[28%] min-w-[300px] border-l border-stone-400/30 pl-8 pr-6 sticky top-25 h-[calc(100vh-100px)] overflow-y-auto pb-10 no-scrollbar">
+    <div className="hidden xl:flex flex-col w-[28%] min-w-[300px] border-l border-stone-400/30 pl-8 pr-6 sticky top-25 h-[calc(100vh-100px)] overflow-y-auto pb-10 no-scrollbar">
       {/* Widget: Your Next Trip */}
       <div className="mt-5 mb-8">
         <h3 className="font-bold text-stone-800 text-lg mb-4 flex items-center gap-2">

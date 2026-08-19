@@ -30,7 +30,7 @@ const FeedLayout = () => {
     <>
       <div className="flex flex-col min-h-dvh min-w-dvw bg-stone-50">
         <Header />
-        <div className="flex flex-1 justify-around w-full">
+        <div className="flex flex-1 justify-center md:justify-around w-full">
           <LeftSidebar sidebarContent={sidebarContent} />
           <Outlet />
         </div>
