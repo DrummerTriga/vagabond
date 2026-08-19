@@ -8,13 +8,13 @@ const FeedPage = () => {
 
   return (
     <div className="w-full flex justify-between">
-      <div className="feed-wrapper flex flex-col items-center justify-start flex-1 max-w-3xl mx-auto">
-        <div className="flex justify-center mt-6 gap-4">
+      <div className="feed-wrapper flex flex-col items-center justify-start flex-1 max-w-3xl mx-auto px-3 sm:px-4 md:px-0">
+        <div className="flex justify-center mt-6 gap-2 sm:gap-4 flex-wrap">
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-8 py-2.5 rounded-full font-bold text-sm transition-all duration-300 ${
+              className={`px-5 sm:px-8 py-2.5 rounded-full font-bold text-sm transition-all duration-300 ${
                 activeTab === tab
                   ? "bg-[#F05A42] text-white shadow-md scale-105"
                   : "bg-white text-stone-500 border border-stone-200 hover:bg-stone-50 hover:text-stone-700 hover:border-stone-300 shadow-sm"

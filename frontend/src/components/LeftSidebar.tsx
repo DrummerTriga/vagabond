@@ -1,11 +1,14 @@
 import { Settings } from "lucide-react";
 import SidebarTab from "../elements/SidebarTab";
+import { useNavigate } from "react-router";
 
 const LeftSidebar = ({ sidebarContent, className = "", ...props }) => {
+  const navigate = useNavigate();
+
   return (
     <>
       <div
-        className={`flex flex-col items-center w-1/5 border-x border-stone-400/30 px-2 sticky top-25 h-[calc(100vh-100px)] overflow-y-auto ${className}`}
+        className={`hidden md:flex flex-col items-center w-16 lg:w-1/5 shrink-0 border-x border-stone-400/30 px-1 lg:px-2 sticky top-20 sm:top-25 h-[calc(100vh-80px)] sm:h-[calc(100vh-100px)] overflow-y-auto ${className}`}
         {...props}
       >
         <div className="flex flex-col gap-1 mt-5 w-full">
@@ -15,6 +18,7 @@ const LeftSidebar = ({ sidebarContent, className = "", ...props }) => {
               tabName={tab.name}
               icon={tab.icon}
               isActive={tab.name === "Home"}
+              onClick={() => navigate(`/${tab.name}`)}
             />
           ))}
         </div>
