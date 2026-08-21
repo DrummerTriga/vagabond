@@ -12,12 +12,17 @@ import MessagesPage from "./pages/Messages/MessagesPage";
 import MapLayout from "./layouts/Map/MapLayout";
 import WorldMapPage from "./pages/Map/WorldMapPage";
 
+import TrendingPage from "./pages/Trending/TrendingPage";
+import SavedTripsPage from "./pages/SavedTrips/SavedTripsPage";
+
 function App() {
   return (
     <>
       <Routes>
         <Route path="" element={<FeedLayout />}>
           <Route path="" element={<FeedPage />} />
+          <Route path="trending" element={<TrendingPage />} />
+          <Route path="saved-trips" element={<SavedTripsPage />} />
         </Route>
         <Route path="profile" element={<UserProfileLayout />}>
           <Route path="me" element={<MePage />} />
