@@ -9,6 +9,7 @@ import {
   Image as ImageIcon,
   Paperclip,
   Smile,
+  ChevronLeft,
 } from "lucide-react";
 
 // Mock Data
@@ -101,6 +102,8 @@ const MessagesPage = () => {
   const [activeFilter, setActiveFilter] = useState("All");
   const [activeChatId, setActiveChatId] = useState("1");
   const [messageText, setMessageText] = useState("");
+  // On mobile only one panel fits, so we swap between the list and the chat
+  const [isChatOpenOnMobile, setIsChatOpenOnMobile] = useState(false);
 
   const filteredChats = MOCK_CHATS.filter((chat) => {
     if (activeFilter === "Unread") return chat.unread > 0;
@@ -113,9 +116,13 @@ const MessagesPage = () => {
   return (
     <div className="flex h-full w-full max-w-7xl mx-auto bg-white border-x border-stone-200 shadow-sm">
       {/* Left Panel: Chat List */}
-      <div className="w-full md:w-1/3 lg:w-[350px] flex flex-col border-r border-stone-200">
+      <div
+        className={`w-full md:w-1/3 lg:w-[350px] flex-col border-r border-stone-200 ${
+          isChatOpenOnMobile ? "hidden md:flex" : "flex"
+        }`}
+      >
         {/* Header & Tabs */}
-        <div className="p-5 border-b border-stone-100 flex flex-col gap-4">
+        <div className="p-4 sm:p-5 border-b border-stone-100 flex flex-col gap-4">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold text-stone-800 tracking-tight">
               Messages
@@ -166,7 +173,10 @@ const MessagesPage = () => {
             filteredChats.map((chat) => (
               <div
                 key={chat.id}
-                onClick={() => setActiveChatId(chat.id)}
+                onClick={() => {
+                  setActiveChatId(chat.id);
+                  setIsChatOpenOnMobile(true);
+                }}
                 className={`flex items-start gap-3 p-4 border-b border-stone-50 cursor-pointer transition-colors ${
                   activeChatId === chat.id
                     ? "bg-[#FEF1EE] border-l-4 border-l-[#F05A42]"
@@ -219,19 +229,30 @@ const MessagesPage = () => {
       </div>
 
       {/* Right Panel: Active Chat */}
-      <div className="hidden md:flex flex-col flex-1 bg-stone-50/30">
+      <div
+        className={`flex-col flex-1 bg-stone-50/30 min-w-0 ${
+          isChatOpenOnMobile ? "flex" : "hidden md:flex"
+        }`}
+      >
         {activeChat ? (
           <>
             {/* Chat Header */}
-            <div className="p-4 border-b border-stone-200 flex justify-between items-center bg-white shadow-sm z-10">
-              <div className="flex items-center gap-3">
+            <div className="p-3 sm:p-4 border-b border-stone-200 flex justify-between items-center gap-2 bg-white shadow-sm z-10">
+              <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                <button
+                  onClick={() => setIsChatOpenOnMobile(false)}
+                  className="md:hidden p-1.5 -ml-1 text-stone-500 hover:text-stone-800 shrink-0"
+                  aria-label="Back to conversations"
+                >
+                  <ChevronLeft size={22} />
+                </button>
                 <img
                   src={activeChat.avatar}
                   alt={activeChat.name}
-                  className="w-10 h-10 rounded-full object-cover"
+                  className="w-10 h-10 rounded-full object-cover shrink-0"
                 />
-                <div className="flex flex-col">
-                  <h2 className="font-bold text-stone-800">
+                <div className="flex flex-col min-w-0">
+                  <h2 className="font-bold text-stone-800 truncate">
                     {activeChat.name}
                   </h2>
                   <span className="text-xs text-stone-500">
@@ -239,11 +260,11 @@ const MessagesPage = () => {
                   </span>
                 </div>
               </div>
-              <div className="flex items-center gap-2 text-stone-500">
-                <button className="p-2 hover:bg-stone-100 rounded-full transition-colors">
+              <div className="flex items-center gap-1 sm:gap-2 text-stone-500 shrink-0">
+                <button className="hidden sm:inline-flex p-2 hover:bg-stone-100 rounded-full transition-colors">
                   <Phone size={20} />
                 </button>
-                <button className="p-2 hover:bg-stone-100 rounded-full transition-colors">
+                <button className="hidden sm:inline-flex p-2 hover:bg-stone-100 rounded-full transition-colors">
                   <Video size={20} />
                 </button>
                 <button className="p-2 hover:bg-stone-100 rounded-full transition-colors">
@@ -253,13 +274,13 @@ const MessagesPage = () => {
             </div>
 
             {/* Messages Feed */}
-            <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-4">
+            <div className="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6 flex flex-col gap-4">
               {MOCK_MESSAGES.map((msg) => {
                 const isMe = msg.senderId === "me";
                 return (
                   <div
                     key={msg.id}
-                    className={`flex flex-col max-w-[70%] ${isMe ? "self-end items-end" : "self-start items-start"}`}
+                    className={`flex flex-col max-w-[85%] sm:max-w-[70%] ${isMe ? "self-end items-end" : "self-start items-start"}`}
                   >
                     <div
                       className={`px-4 py-2.5 rounded-2xl shadow-sm text-sm ${
@@ -279,22 +300,22 @@ const MessagesPage = () => {
             </div>
 
             {/* Input Area */}
-            <div className="p-4 bg-white border-t border-stone-200">
-              <div className="flex items-center gap-2 bg-stone-100 p-2 rounded-2xl">
-                <button className="p-2 text-stone-400 hover:text-stone-600 transition-colors">
+            <div className="p-3 sm:p-4 bg-white border-t border-stone-200">
+              <div className="flex items-center gap-1 sm:gap-2 bg-stone-100 p-2 rounded-2xl">
+                <button className="hidden sm:inline-flex p-2 text-stone-400 hover:text-stone-600 transition-colors">
                   <Smile size={20} />
                 </button>
-                <button className="p-2 text-stone-400 hover:text-stone-600 transition-colors">
+                <button className="p-2 text-stone-400 hover:text-stone-600 transition-colors shrink-0">
                   <ImageIcon size={20} />
                 </button>
-                <button className="p-2 text-stone-400 hover:text-stone-600 transition-colors">
+                <button className="hidden sm:inline-flex p-2 text-stone-400 hover:text-stone-600 transition-colors">
                   <Paperclip size={20} />
                 </button>
                 <input
                   type="text"
                   value={messageText}
                   onChange={(e) => setMessageText(e.target.value)}
-                  className="flex-1 bg-transparent px-2 outline-none text-stone-800 placeholder:text-stone-400 text-sm"
+                  className="flex-1 min-w-0 bg-transparent px-2 outline-none text-stone-800 placeholder:text-stone-400 text-sm"
                   placeholder="Type a message..."
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && messageText.trim() !== "") {
