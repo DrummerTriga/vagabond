@@ -1,7 +1,22 @@
-const SidebarTab = ({ tabName, icon, isActive = false }) => {
+import type { ReactNode } from "react";
+
+interface SidebarTabProps {
+  tabName: string;
+  icon: ReactNode;
+  isActive?: boolean;
+  onClick?: () => void;
+}
+
+const SidebarTab = ({
+  tabName,
+  icon,
+  isActive = false,
+  onClick,
+}: SidebarTabProps) => {
   return (
     <>
       <div
+        onClick={onClick}
         className={`group flex items-center justify-center lg:justify-start gap-0 lg:gap-4 w-full p-3 lg:pl-6 rounded-2xl font-medium cursor-pointer transition-all duration-300 active:scale-95 ${
           isActive
             ? "bg-[#FEF1EE] text-[#F05A42]"

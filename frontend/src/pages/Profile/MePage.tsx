@@ -100,16 +100,16 @@ const MePage = () => {
         <div className="w-full md:w-2/3 flex flex-col gap-6">
           {/* Widget 1: My Trips */}
           <div className="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
-            <div className="p-5 border-b border-stone-100 flex justify-between items-center bg-stone-50/50">
+            <div className="p-4 sm:p-5 border-b border-stone-100 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 bg-stone-50/50">
               <h2 className="font-bold text-lg text-stone-800 flex items-center gap-2">
                 <Navigation size={20} className="text-[#F05A42]" /> My Trips
               </h2>
-              <div className="flex bg-stone-100 p-1 rounded-lg">
+              <div className="flex bg-stone-100 p-1 rounded-lg self-start sm:self-auto">
                 {["Past", "Upcoming", "Wishlist"].map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setTripTab(tab)}
-                    className={`px-4 py-1.5 text-xs font-bold rounded-md transition-all ${
+                    className={`px-3 sm:px-4 py-1.5 text-xs font-bold rounded-md transition-all whitespace-nowrap ${
                       tripTab === tab
                         ? "bg-white text-stone-800 shadow-sm"
                         : "text-stone-500 hover:text-stone-700"

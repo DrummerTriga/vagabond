@@ -50,36 +50,39 @@ const ImageModal = ({
     >
       {/* Header Info */}
       <div
-        className="absolute top-0 w-full flex justify-between items-center px-6 py-4 bg-gradient-to-b from-black/80 to-transparent z-10"
+        className="absolute top-0 w-full flex justify-between items-center gap-2 px-3 sm:px-6 py-3 sm:py-4 bg-gradient-to-b from-black/80 to-transparent z-10"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 sm:gap-4 min-w-0">
           <img
             src={avatarSrc}
             alt="User"
-            className="w-12 h-12 rounded-full border border-stone-600 object-cover"
+            className="w-9 h-9 sm:w-12 sm:h-12 rounded-full border border-stone-600 object-cover shrink-0"
           />
-          <div className="flex flex-col">
-            <span className="text-white font-semibold text-lg tracking-wide">
+          <div className="flex flex-col min-w-0">
+            <span className="text-white font-semibold text-sm sm:text-lg tracking-wide truncate">
               {user.name}
             </span>
-            <span className="text-stone-400 text-sm">{timeAgo}</span>
+            <span className="text-stone-400 text-xs sm:text-sm truncate">
+              {timeAgo}
+            </span>
           </div>
-          <button className="ml-6 px-4 py-1.5 rounded-full border border-stone-400 text-white text-sm hover:bg-white hover:text-black hover:border-white transition-all font-medium">
+          <button className="hidden sm:block ml-6 px-4 py-1.5 rounded-full border border-stone-400 text-white text-sm hover:bg-white hover:text-black hover:border-white transition-all font-medium shrink-0 whitespace-nowrap">
             View Profile
           </button>
         </div>
         <button
           onClick={onClose}
-          className="p-2 text-stone-300 hover:text-white hover:bg-white/10 rounded-full transition-colors focus:outline-none"
+          className="p-2 text-stone-300 hover:text-white hover:bg-white/10 rounded-full transition-colors focus:outline-none shrink-0"
         >
-          <X size={28} />
+          <X size={24} className="sm:hidden" />
+          <X size={28} className="hidden sm:block" />
         </button>
       </div>
 
       {/* Main Image Container */}
       <div
-        className="relative w-full h-full flex items-center justify-center px-16 pb-20 pt-20"
+        className="relative w-full h-full flex items-center justify-center px-3 sm:px-16 pt-20 pb-28 sm:pb-20"
         onClick={(e) => e.stopPropagation()}
       >
         <img
@@ -94,17 +97,17 @@ const ImageModal = ({
             {currentIndex > 0 && (
               <button
                 onClick={prevImage}
-                className="absolute left-6 p-4 bg-black/50 hover:bg-black/80 text-white rounded-full transition-all backdrop-blur-md hover:scale-105 active:scale-95 focus:outline-none border border-white/10"
+                className="absolute left-2 sm:left-6 p-2 sm:p-4 bg-black/50 hover:bg-black/80 text-white rounded-full transition-all backdrop-blur-md hover:scale-105 active:scale-95 focus:outline-none border border-white/10"
               >
-                <ChevronLeft size={36} />
+                <ChevronLeft className="w-6 h-6 sm:w-9 sm:h-9" />
               </button>
             )}
             {currentIndex < images.length - 1 && (
               <button
                 onClick={nextImage}
-                className="absolute right-6 p-4 bg-black/50 hover:bg-black/80 text-white rounded-full transition-all backdrop-blur-md hover:scale-105 active:scale-95 focus:outline-none border border-white/10"
+                className="absolute right-2 sm:right-6 p-2 sm:p-4 bg-black/50 hover:bg-black/80 text-white rounded-full transition-all backdrop-blur-md hover:scale-105 active:scale-95 focus:outline-none border border-white/10"
               >
-                <ChevronRight size={36} />
+                <ChevronRight className="w-6 h-6 sm:w-9 sm:h-9" />
               </button>
             )}
           </>
@@ -114,14 +117,14 @@ const ImageModal = ({
       {/* Thumbnails (for aesthetic multi-image navigation) */}
       {images.length > 1 && (
         <div
-          className="absolute bottom-6 flex gap-3"
+          className="absolute bottom-4 sm:bottom-6 flex gap-2 sm:gap-3 max-w-full px-3 overflow-x-auto no-scrollbar"
           onClick={(e) => e.stopPropagation()}
         >
           {images.map((img, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentIndex(idx)}
-              className={`w-16 h-16 rounded-lg overflow-hidden border-2 transition-all shadow-lg ${
+              className={`w-12 h-12 sm:w-16 sm:h-16 shrink-0 rounded-lg overflow-hidden border-2 transition-all shadow-lg ${
                 currentIndex === idx
                   ? "border-[#F05A42] opacity-100 scale-110"
                   : "border-transparent opacity-40 hover:opacity-100 hover:scale-105"
